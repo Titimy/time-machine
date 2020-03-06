@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 
 typedef struct date
 {
@@ -15,5 +14,6 @@ typedef struct date
 
 date get_date(void);
 date get_todays_date(void);
+int day_passed(date init);
 
 #endif

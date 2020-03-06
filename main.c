@@ -9,7 +9,7 @@ int main(void)
 
     days = day_passed(init);
 
-    printf("day passed is : %d\n", days);
+    printf("you've lived : %d\n", days);
 
     return 0;
 }

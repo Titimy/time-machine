@@ -6,50 +6,48 @@ int day_passed(date init)
     date tmp;
     int days = 0;
 
-    tmp = init;
-
-    while (tmp.day != today.day || tmp.month != today.month || tmp.year != today.year)
+    while (init.day != today.day || init.month != today.month || init.year != today.year)
     {
         days++;
-        tmp.day++;
+        init.day++;
 
-        if (tmp.month < 8)
+        if (init.month < 8)
         {
-            if (tmp.month % 2 != 0)
+            if (init.month % 2 != 0)
             {
-                if (tmp.day == 32)
+                if (init.day == 32)
                 {
-                    tmp.day = 1;
-                    tmp.month++;
+                    init.day = 1;
+                    init.month++;
                 }
             }
 
             else
             {
-                if (tmp.month == 2 && tmp.year % 4 == 0)
+                if (init.month == 2 && init.year % 4 == 0)
                 {
-                    if (tmp.day == 30)
+                    if (init.day == 30)
                     {
-                        tmp.day = 1;
-                        tmp.month++;
+                        init.day = 1;
+                        init.month++;
                     }
                 }
 
-                else if (tmp.month == 2 && tmp.year % 4 != 0)
+                else if (init.month == 2 && init.year % 4 != 0)
                 {
-                    if (tmp.day == 29)
+                    if (init.day == 29)
                     {
-                        tmp.day = 1;
-                        tmp.month++;
+                        init.day = 1;
+                        init.month++;
                     }
                 }
 
                 else
                 {
-                    if (tmp.day == 31)
+                    if (init.day == 31)
                     {
-                        tmp.day = 1;
-                        tmp.month++;
+                        init.day = 1;
+                        init.month++;
                     }
                 }
             }
@@ -57,27 +55,27 @@ int day_passed(date init)
 
         else
         {
-            if (tmp.month % 2 == 0)
+            if (init.month % 2 == 0)
             {
-                if (tmp.day == 32)
+                if (init.day == 32)
                 {
-                    tmp.day = 1;
-                    tmp.month++;
+                    init.day = 1;
+                    init.month++;
                 }
             }
-            else if (tmp.day == 31)
+            else if (init.day == 31)
             {
 
-                tmp.day = 1;
-                tmp.month++;
+                init.day = 1;
+                init.month++;
             }
         }
 
-        if (tmp.month == 13)
+        if (init.month == 13)
         {
-            tmp.day = 1;
-            tmp.month = 1;
-            tmp.year++;
+            init.day = 1;
+            init.month = 1;
+            init.year++;
         }
     }
 

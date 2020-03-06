@@ -11,7 +11,7 @@ date get_date(void)
     {
         error = false;
         overflow = false;
-        printf("veillez entrer une date (jj/mm/aaaa) : ");
+        printf("please enter your date of birth (dd/mm/yyyy) : ");
         scanf("%d/%d/%d", &this.day, &this.month, &this.year);
 
         if (this.day <= 0 || this.month < 0 || this.year < 0) // si les données sont en quelque soit négatif
@@ -52,10 +52,10 @@ date get_date(void)
             overflow = true;
 
         if (error)
-            printf("\n  -> ERROR : veillez entrer une date valide.\n\n");
+            printf("\n  -> ERROR : please enter a valid date.\n\n");
 
         if (overflow)
-            printf("\n  -> ERROR : veillez entrer une date passee\n\n");
+            printf("\n  -> ERROR : please enter a passed date.\n\n");
 
     } while (error || overflow);
 

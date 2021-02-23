@@ -12,8 +12,7 @@ typedef struct date
     int year;
 } date;
 
-date get_date(void);
-date get_todays_date(void);
-int day_passed(date init);
+date get_date(char *questionDisplayed);
+int days_in_between(date date1, date date2);
 
 #endif

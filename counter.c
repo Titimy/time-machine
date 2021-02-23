@@ -1,53 +1,103 @@
 #include "functions.h"
 
-int day_passed(date init)
+void swap_dates(date *date1, date *date2)
 {
-    date today = get_todays_date();
-    date tmp;
+    date tmp = *date1;
+    *date1 = *date2;
+    *date2 = tmp;
+
+    return;
+}
+
+void reorder_dates(date *date1, date *date2)
+{
+    /*******
+     * years
+    ********/
+
+    if(date1->year < date2->year) return;
+
+    if(date1->year > date2->year)
+    {
+        swap_dates(date1, date2);
+        return;
+    }
+
+    /*********
+     * months
+    **********/
+
+    if(date1->month < date2->month) return;
+
+    if(date1->month > date2->month)
+    {
+        swap_dates(date1, date2);
+        return;
+    }
+
+    /*******
+     * days
+    ********/
+
+    if(date1->day < date2->day) return;
+
+    if(date1->day > date2->day)
+    {
+        swap_dates(date1, date2);
+        return;
+    }
+
+    return;
+}
+
+int days_in_between(date date1, date date2)
+{
     int days = 0;
 
-    while (init.day != today.day || init.month != today.month || init.year != today.year)
+    reorder_dates(&date1, &date2);
+
+    while (date1.day != date2.day || date1.month != date2.month || date1.year != date2.year)
     {
         days++;
-        init.day++;
+        date1.day++;
 
-        if (init.month < 8)
+        if (date1.month < 8)
         {
-            if (init.month % 2 != 0)
+            if (date1.month % 2 != 0)
             {
-                if (init.day == 32)
+                if (date1.day == 32)
                 {
-                    init.day = 1;
-                    init.month++;
+                    date1.day = 1;
+                    date1.month++;
                 }
             }
 
             else
             {
-                if (init.month == 2 && init.year % 4 == 0)
+                if (date1.month == 2 && date1.year % 4 == 0)
                 {
-                    if (init.day == 30)
+                    if (date1.day == 30)
                     {
-                        init.day = 1;
-                        init.month++;
+                        date1.day = 1;
+                        date1.month++;
                     }
                 }
 
-                else if (init.month == 2 && init.year % 4 != 0)
+                else if (date1.month == 2 && date1.year % 4 != 0)
                 {
-                    if (init.day == 29)
+                    if (date1.day == 29)
                     {
-                        init.day = 1;
-                        init.month++;
+                        date1.day = 1;
+                        date1.month++;
                     }
                 }
 
                 else
                 {
-                    if (init.day == 31)
+                    if (date1.day == 31)
                     {
-                        init.day = 1;
-                        init.month++;
+                        date1.day = 1;
+                        date1.month++;
                     }
                 }
             }
@@ -55,27 +105,27 @@ int day_passed(date init)
 
         else
         {
-            if (init.month % 2 == 0)
+            if (date1.month % 2 == 0)
             {
-                if (init.day == 32)
+                if (date1.day == 32)
                 {
-                    init.day = 1;
-                    init.month++;
+                    date1.day = 1;
+                    date1.month++;
                 }
             }
-            else if (init.day == 31)
+            else if (date1.day == 31)
             {
 
-                init.day = 1;
-                init.month++;
+                date1.day = 1;
+                date1.month++;
             }
         }
 
-        if (init.month == 13)
+        if (date1.month == 13)
         {
-            init.day = 1;
-            init.month = 1;
-            init.year++;
+            date1.day = 1;
+            date1.month = 1;
+            date1.year++;
         }
     }
 

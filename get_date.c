@@ -1,63 +1,55 @@
 #include "functions.h"
 
-date get_date(void)
+bool is_even(int number)
 {
-    bool error, overflow;
-    date this, today;
+    if(number % 2) return false;
+    return true;
+}
 
-    today = get_todays_date();
+date get_date(char *questionDisplayed)
+{
+    bool error;
+    date this;
 
     do
     {
         error = false;
-        overflow = false;
-        printf("please enter your date of birth (dd/mm/yyyy) : ");
+
+        printf("%s", questionDisplayed);
         scanf("%d/%d/%d", &this.day, &this.month, &this.year);
 
-        if (this.day <= 0 || this.month < 0 || this.year < 0) // si les données sont en quelque soit négatif
-            error = true;
+        // si les données sont en quelque soit négatifs
+        if(this.day <= 0 || this.month < 0 || this.year < 0) error = true;
 
-        if (this.month == 2 && this.day == 30) // février ne peut pas dépasser 29
-            error = true;
+        // février ne peut pas dépasser 29
+        if(this.month == 2 && this.day == 30) error = true;
 
-        if (this.month > 12) // les mois ne peuvent pas dépasser 12
-            error = true;
+        // les mois ne peuvent pas dépasser 12
+        if(this.month > 12) error = true;
 
-        if (this.year % 4 != 0 && this.month == 2 && this.day == 29) // février ne peut avoir 29 que si l'année est bisextile
-            error = true;
+        // février ne peut avoir 29 que si l'année est bisextile
+        if(this.year % 4 != 0 && this.month == 2 && this.day == 29) error = true;
 
-        // les mois ne peuvent pas dépasser 30 ou 31
 
-        if ((this.month % 2 == 0 && this.month < 8) && this.day >= 31)
-            error = true;
+        /*******************************************
+         * !les mois ne peuvent pas dépasser 30 ou 31
+        ********************************************/
+        if(this.month < 8)
+        {
+            if(is_even(this.month) && this.day >= 31) error = true;
+            else if(!is_even(this.month) && this.day > 31) error = true;
+        }
 
-        if ((this.month % 2 != 0 && this.month < 8) && this.day > 31)
-            error = true;
-
-        if ((this.month % 2 == 0 && this.month >= 8) && this.day > 31)
-            error = true;
-
-        if ((this.month % 2 != 0 && this.month >= 8) && this.day >= 31)
-            error = true;
-
+        else if(this.month >= 8)
+        {
+            if(is_even(this.month) && this.day > 31) error = true;
+            else if(!is_even(this.month) && this.day >= 31) error = true;
+        }
         /*-----------------------------------------------------------*/
 
-        if (this.year > today.year)
-            overflow = true;
+        if(error) printf("\n  -> ERROR : please enter a valid date.\n\n");
 
-        else if (this.year == today.year && this.month > today.month)
-            overflow = true;
-
-        else if (this.year == today.year && this.month == today.month && this.day >= today.day)
-            overflow = true;
-
-        if (error)
-            printf("\n  -> ERROR : please enter a valid date.\n\n");
-
-        if (overflow)
-            printf("\n  -> ERROR : please enter a passed date.\n\n");
-
-    } while (error || overflow);
+    } while (error);
 
     return this;
 }

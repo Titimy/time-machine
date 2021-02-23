@@ -1,1 +1,5 @@
-a time machine able to calculate the exact difference between a given date and today's date in pure C language.
+# Time machine
+
+a program able to calculate the exact difference between two given dates.
+
+coded in pure `C language`.
